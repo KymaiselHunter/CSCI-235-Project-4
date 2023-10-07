@@ -139,3 +139,59 @@ void Barbarian::toggleEnrage()
 {
     enraged_ = !enraged_;
 }
+
+//Virtual Functions of Character overides
+/**
+    @post     : displays Barbarian data in the form:
+    "[NAME] is a Level [LEVEL] [RACE] BARBARIAN.
+    \nVitality: [VITALITY]
+    \nArmor: [ARMOR]
+    \nThey are [an enemy/not an enemy].
+    \nMain Weapon: [MAINWEAPON]
+    \nOffhand Weapon: [OFFHANDWEAPON]
+    \nEnraged: [TRUE/FALSE]
+    \n\n"
+    
+    Example:
+    BONK is a Level 5 HUMAN BARBARIAN.
+    Vitality: 11
+    Armor: 5
+    They are an enemy.
+    Main Weapon: MACE
+    Offhand Weapon: ANOTHERMACE
+    Enraged: TRUE 
+*/
+void Barbarian::display()
+{
+    std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << 
+    ".\nVitality: " << this->getVitality() << "\nMax Armor: " << this->getArmor() << std::endl;
+    if(this->isEnemy()) std::cout << "They are an enemy\n";
+    else std::cout << "They are not an enemy\n";
+
+    std::cout << "Main Weapon: " << this->getMainWeapon() <<
+    "\nOFfhand Weapon: " << this->getSecondaryWeapon() << std::endl;
+
+    if(this->getEnrage()) std::cout << "Enraged: TRUE" << std::endl;
+    else std::cout << "Enraged : FALSE" << std::endl;
+}
+
+/**
+    @post: 
+    If the character is UNDEAD, gain 3 Vitality points. Nothing else happens.
+    
+    If the character is NOT UNDEAD, Vitality is set to 1. 
+    In addition, as a Barbarian: 
+    Become enraged if the character was not enraged, and not enraged if they were already enraged. 
+    If they have now become enraged, the offhand weapon is replaced with "TABLE". 
+    If they are now not enraged, the main weapon is replaced with "BUCKET".
+*/
+void Barbarian::eatTaintedStew()
+{
+    if(this->getRace() == "UNDEAD") this->setVitality(this->getVitality() + 3);
+    else this->setVitality(1);
+
+    this->toggleEnrage();
+
+    if(this->getEnrage()) this->setSecondaryWeapon("TABLE");
+    else this->setMainWeapon("BUCKET");
+}

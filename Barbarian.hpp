@@ -90,6 +90,41 @@ class Barbarian : public Character
          @post   : sets the enraged variable to the opposite of what it was
         **/
         void toggleEnrage();
+
+        //Virtual Function Overrides
+        /**
+            @post     : displays Barbarian data in the form:
+            "[NAME] is a Level [LEVEL] [RACE] BARBARIAN.
+            \nVitality: [VITALITY]
+            \nArmor: [ARMOR]
+            \nThey are [an enemy/not an enemy].
+            \nMain Weapon: [MAINWEAPON]
+            \nOffhand Weapon: [OFFHANDWEAPON]
+            \nEnraged: [TRUE/FALSE]
+            \n\n"
+            
+            Example:
+            BONK is a Level 5 HUMAN BARBARIAN.
+            Vitality: 11
+            Armor: 5
+            They are an enemy.
+            Main Weapon: MACE
+            Offhand Weapon: ANOTHERMACE
+            Enraged: TRUE 
+        */
+        void display();
+
+        /**
+            @post: 
+            If the character is UNDEAD, gain 3 Vitality points. Nothing else happens.
+            
+            If the character is NOT UNDEAD, Vitality is set to 1. 
+            In addition, as a Barbarian: 
+            Become enraged if the character was not enraged, and not enraged if they were already enraged. 
+            If they have now become enraged, the offhand weapon is replaced with "TABLE". 
+            If they are now not enraged, the main weapon is replaced with "BUCKET".
+        */
+        void eatTaintedStew();
 };
 
 #endif

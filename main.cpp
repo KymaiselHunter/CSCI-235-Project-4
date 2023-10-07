@@ -6,6 +6,7 @@
 using namespace std;
 
 #include "Character.hpp"
+#include "Barbarian.hpp"
 
 int main()
 {
@@ -15,6 +16,13 @@ int main()
 
     testCharacter->display();
     */
+   
+    Barbarian *b1 = new Barbarian("BONK", "HUMAN", 11, 5, 5, true, "MACE", "ANOTHERMACE", true);    
+    b1->display();
 
-
+    cout << "\nTainted Barbarian: " << endl;
+    b1->eatTaintedStew();
+    b1->display();
+    b1->eatTaintedStew();
+    b1->display();
 }
