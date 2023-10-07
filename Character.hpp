@@ -145,11 +145,20 @@ class Character
         */
         bool operator!=(const Character& rhs) const;
 
+        //Abstract Functions(only define in derived classes)
         /**
+        Original Purpose:
          @post     : displays Character data in the form:
-        "[name_] is a Level [level_] [race_]. \nVitality: [vitality_] \nMax Armor: [armor_] \n[They are / They are not] an enemy.\n"     
+        "[name_] is a Level [level_] [race_]. \nVitality: [vitality_] \nMax Armor: [armor_] \n[They are / They are not] an enemy.\n"  
+
+        Now Make the display() function pure virtual so each subclass has it's own display   
         */
-        void display() const;
+        virtual void display() = 0;
+
+        /**
+        @post: Modifies the character's private member variables (the exact modifications will be subclass specific)
+        */
+        virtual void eatTaintedStew() = 0;
 
     private:
         //The name of the character (a string in UPPERCASE)

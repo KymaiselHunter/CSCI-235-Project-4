@@ -262,13 +262,13 @@ bool Character::operator!=(const Character& rhs) const
 }
 
 /**
+ Original Purpose:
  @post     : displays Character data in the form:
 "[name_] is a Level [level_] [race_]. \nVitality: [vitality_] \nMax Armor: [armor_] \n[They are / They are not] an enemy.\n"     
+
+Now Make the display() function pure virtual so each subclass has it's own display   
 */
-void Character::display() const
-{
-    std::cout<<name_<<" is a Level "<<level_<<" "<<getRace()<<
-    ". \nVitality: "<<vitality_<<
-    "\nMax Armor: "<<armor_<<" \n"<<
-    (enemy_ ? "They are an enemy.\n" : "They are not an enemy.\n");
-}
+// void Character::display()=0
+// {
+    
+// }
