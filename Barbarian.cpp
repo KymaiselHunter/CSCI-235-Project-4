@@ -163,16 +163,18 @@ void Barbarian::toggleEnrage()
 */
 void Barbarian::display()
 {
+    //standard character display
     std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << 
     ".\nVitality: " << this->getVitality() << "\nMax Armor: " << this->getArmor() << std::endl;
     if(this->isEnemy()) std::cout << "They are an enemy\n";
     else std::cout << "They are not an enemy\n";
 
+    //unique display
     std::cout << "Main Weapon: " << this->getMainWeapon() <<
     "\nOFfhand Weapon: " << this->getSecondaryWeapon() << std::endl;
 
-    if(this->getEnrage()) std::cout << "Enraged: TRUE" << std::endl;
-    else std::cout << "Enraged : FALSE" << std::endl;
+    if(this->getEnrage()) std::cout << "Enraged: TRUE\n" << std::endl;
+    else std::cout << "Enraged : FALSE\n" << std::endl;
 }
 
 /**
@@ -187,9 +189,11 @@ void Barbarian::display()
 */
 void Barbarian::eatTaintedStew()
 {
+    //non unique effects(based on race not class)
     if(this->getRace() == "UNDEAD") this->setVitality(this->getVitality() + 3);
     else this->setVitality(1);
 
+    //unique effects
     this->toggleEnrage();
 
     if(this->getEnrage()) this->setSecondaryWeapon("TABLE");

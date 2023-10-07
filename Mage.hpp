@@ -92,6 +92,40 @@ class Mage : public Character
             @return  : the summon-incarnate flag
         **/
         bool hasIncarnateSummon() const;
+
+        //Virtual Function Overrides
+        /**
+            @post     : displays Mage data in the form:
+            "[NAME] is a Level [LEVEL] [RACE] MAGE.
+            \nVitality: [VITALITY]
+            \nArmor: [ARMOR]
+            \nThey are [an enemy/not an enemy].
+            \nSchool of Magic: [SCHOOL]
+            \nWeapon: [WEAPON]
+            \nThey [can/cannot] summon an Incarnate.
+            \n\n"
+            
+            Example:
+            SPYNACH is a Level 4 ELF MAGE.
+            Vitality: 6
+            Armor: 4
+            They are not an enemy.
+            School of Magic: ILLUSION
+            Weapon: WAND
+            They can summon an Incarnate.
+        */
+        void display();
+
+        /**
+            @post: 
+            If the character is UNDEAD, gain 3 Vitality points. Nothing else happens.
+            
+            If the character is NOT UNDEAD, Vitality is set to 1. 
+            In addition, as a Mage: 
+            If the character is equipped with a wand or staff, they cast a healing ritual and recover vitality points – 2 points with a wand, 3 with a staff.
+            If they can summon an incarnate, the emotional support allows the character to recover 1 Vitality point.
+        */
+       void eatTaintedStew();
 };
 
 #endif

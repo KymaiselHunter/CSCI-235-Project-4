@@ -142,3 +142,61 @@ bool Mage::hasIncarnateSummon() const
 {
     return can_summon_incarnate_;
 }
+
+/**
+    @post     : displays Mage data in the form:
+    "[NAME] is a Level [LEVEL] [RACE] MAGE.
+    \nVitality: [VITALITY]
+    \nArmor: [ARMOR]
+    \nThey are [an enemy/not an enemy].
+    \nSchool of Magic: [SCHOOL]
+    \nWeapon: [WEAPON]
+    \nThey [can/cannot] summon an Incarnate.
+    \n\n"
+    
+    Example:
+    SPYNACH is a Level 4 ELF MAGE.
+    Vitality: 6
+    Armor: 4
+    They are not an enemy.
+    School of Magic: ILLUSION
+    Weapon: WAND
+    They can summon an Incarnate.
+*/
+void Mage::display()
+{
+    //Standard Character display
+    std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << 
+    ".\nVitality: " << this->getVitality() << "\nMax Armor: " << this->getArmor() << std::endl;
+    if(this->isEnemy()) std::cout << "They are an enemy\n";
+    else std::cout << "They are not an enemy\n";
+
+    //unique display
+    std::cout << "School of Magic: " << this->getSchool() <<
+    "\nWeapon: " << this->getCastingWeapon() << std::endl;
+
+    if(this->hasIncarnateSummon()) std::cout << "They can summon an Incarnate\n" << std::endl;
+    else std::cout << "They cannot summon an Incarnate\n" << std::endl;
+}
+
+/**
+    @post: 
+    If the character is UNDEAD, gain 3 Vitality points. Nothing else happens.
+    
+    If the character is NOT UNDEAD, Vitality is set to 1. 
+    In addition, as a Mage: 
+    If the character is equipped with a wand or staff, they cast a healing ritual and recover vitality points – 2 points with a wand, 3 with a staff.
+    If they can summon an incarnate, the emotional support allows the character to recover 1 Vitality point.
+*/
+void Mage::eatTaintedStew()
+{
+    //non unique effects(based on race not class)
+    if(this->getRace() == "UNDEAD") this->setVitality(this->getVitality() + 3);
+    else this->setVitality(1);
+
+    //unique effects
+    if(this->getCastingWeapon() == "STAFF") this->setVitality(this->getVitality() + 3);
+    else if(this->getCastingWeapon() == "WAND") this->setVitality(this->getVitality() + 2);
+
+    if(this->hasIncarnateSummon()) this->setVitality(this->getVitality() + 1);
+}
