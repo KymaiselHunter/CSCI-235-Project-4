@@ -14,6 +14,9 @@ Tavern::Tavern() : ArrayBag<Character*>(), level_sum_{0}, num_enemies_{0}
 
 //include for taking a file
 #include <fstream>
+//include for storing info
+#include <vector>
+
 //Paremeterized Constructor
 /**
     @param: the name of an input file
@@ -55,11 +58,36 @@ Tavern::Tavern(std::string pFileName)
   // {
 
   // }
-  std::string line;
-  while(getline(tavernParameters, line))
-  {
-    std::cout << "line : "<< line << std::endl;
-  }
+  // try
+  // {
+  //   std::string line;
+  //   while(getline(tavernParameters, line))
+  //   {
+  //     std::cout << "line : "<< line << std::endl;
+  //     //loop to get info from line
+  //     std::vector<std::string> lineInformation;
+
+  //     while(line.find(",") != -1)
+  //     {
+  //       lineInformation.push_back(line.substr(0, line.find(",")));
+  //       line = line.substr(line.find(",") + 1);
+  //     }
+  //     lineInformation.push_back(line);
+
+  //     if(lineInformation.size() != 12) throw 12;
+      
+  //     if(lineInformation)
+  //   }
+  // }
+  // catch(int x)
+  // {
+  //   std::cout << "Incorrect amount of information in line";
+  // }
+  // catch(...)
+  // {
+  //   std::cout << "Unknown File to character error";
+  // }
+  
 
   tavernParameters.close();
 }

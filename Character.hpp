@@ -153,7 +153,7 @@ class Character
 
         Now Make the display() function pure virtual so each subclass has it's own display   
         */
-        virtual void display() = 0;
+        virtual void display() const = 0;
 
         /**
         @post: Modifies the character's private member variables (the exact modifications will be subclass specific)

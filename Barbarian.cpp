@@ -161,7 +161,7 @@ void Barbarian::toggleEnrage()
     Offhand Weapon: ANOTHERMACE
     Enraged: TRUE 
 */
-void Barbarian::display()
+void Barbarian::display() const
 {
     //standard character display
     std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " BARBARIAN." << 

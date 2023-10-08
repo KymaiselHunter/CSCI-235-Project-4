@@ -143,7 +143,7 @@ class Ranger : public Character
             FIRE: 5
             Affinities: FIRE, POISON
         */
-        void display();
+        void display() const;
 
         /**
             @post: 

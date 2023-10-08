@@ -114,7 +114,7 @@ class Mage : public Character
             Weapon: WAND
             They can summon an Incarnate.
         */
-        void display();
+        void display() const;
 
         /**
             @post: 

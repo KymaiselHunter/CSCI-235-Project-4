@@ -234,7 +234,7 @@ bool Ranger::getCompanion() const
     FIRE: 5
     Affinities: FIRE, POISON
 */
-void Ranger::display()
+void Ranger::display() const
 {
     //Standard Character display
     std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " RANGER." << 
