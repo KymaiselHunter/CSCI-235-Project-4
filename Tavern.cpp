@@ -8,23 +8,23 @@ Tavern.cpp declares the Tavern class along with its private and public members
 #include "Tavern.hpp"
 
 /** Default Constructor **/
-Tavern::Tavern() : ArrayBag<Character>(), level_sum_{0}, num_enemies_{0}
+Tavern::Tavern() : ArrayBag<Character*>(), level_sum_{0}, num_enemies_{0}
 {
 }
 
 
 
 /** 
-    @param:   A reference to a Character entering the Tavern
+    @param:   A reference to a Character(changed to pointer)  entering the Tavern
     @return:  returns true if a Character was successfully added to items_, false otherwise
-    @post:    adds Character to the Tavern and updates the level sum and the enemy count if the character is an enemy.
+    @post:    adds Character(changed to pointer)  to the Tavern and updates the level sum and the enemy count if the character is an enemy.
 **/
-bool Tavern::enterTavern(const Character& a_character)
+bool Tavern::enterTavern(Character* a_character)
 {
   if(add(a_character))
   {
-    level_sum_ += a_character.getLevel();
-    if(a_character.isEnemy())
+    level_sum_ += a_character->getLevel();
+    if(a_character->isEnemy())
       num_enemies_++;
      
     return true;
@@ -35,16 +35,16 @@ bool Tavern::enterTavern(const Character& a_character)
   }
 }
 
-/** @param:   A reference to a Character leaving the Tavern  
+/** @param:   A reference(changed to pointer)  to a Character leaving the Tavern  
     @return:  returns true if a character was successfully removed from items_, false otherwise
-    @post:    removes the character from the Tavern and updates the level sum and the enemy count if the character is an enemy.
+    @post:    removes the character(pointer)  from the Tavern and updates the level sum and the enemy count if the character is an enemy.
 **/
-bool Tavern::exitTavern(const Character& a_character)
+bool Tavern::exitTavern(Character* a_character)
 {
   if(remove(a_character))
   {
-    level_sum_ -= a_character.getLevel();
-    if(a_character.isEnemy())
+    level_sum_ -= a_character->getLevel();
+    if(a_character->isEnemy())
       num_enemies_--;
       
     return true;
@@ -108,7 +108,7 @@ int Tavern::tallyRace(const std::string &race)
   int curr_index = 0;   
   while (curr_index < item_count_)
   {
-    if (items_[curr_index].getRace() == race)
+    if (items_[curr_index]->getRace() == race)
     {
       frequency++;
     } 

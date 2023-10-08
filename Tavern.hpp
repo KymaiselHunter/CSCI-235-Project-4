@@ -15,23 +15,23 @@ Tavern.hpp declares the Tavern class along with its private and public members
 #include <cmath>
 #include <iomanip>
 
-class Tavern : public ArrayBag<Character>{
+class Tavern : public ArrayBag<Character*>{
   public:
     /** Default Constructor **/
     Tavern(); 
 
     /** 
-        @param:   A reference to a Character entering the Tavern
+        @param:   A reference(changed to pointer) to a Character entering the Tavern
         @return:  returns true if a Character was successfully added to items_, false otherwise
-        @post:    adds Character to the Tavern and updates the level sum and the enemy count if the character is an enemy.
+        @post:    adds Character(changed to pointer) to the Tavern and updates the level sum and the enemy count if the character is an enemy.
     **/
-    bool enterTavern(const Character& a_character);
+    bool enterTavern(Character* a_character);
 
-    /** @param:   A reference to a Character leaving the Tavern  
+    /** @param:   A reference(changed to pointer)  to a Character leaving the Tavern  
         @return:  returns true if a character was successfully removed from items_, false otherwise
-        @post:    removes the character from the Tavern and updates the level sum  and the enemy if the character is an enemy.
+        @post:    removes the character(pointer) from the Tavern and updates the level sum  and the enemy if the character is an enemy.
     **/
-    bool exitTavern(const Character& a_character);
+    bool exitTavern(Character* a_character);
 
    
 
