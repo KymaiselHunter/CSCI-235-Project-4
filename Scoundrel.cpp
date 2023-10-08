@@ -189,3 +189,77 @@ bool Scoundrel::hasDisguise() const
 {
     return has_disguise_;
 } 
+
+//virtual function overrides
+/**
+     @post     : displays Scoundrel data in the form:
+    "[NAME] is a Level [LEVEL] [RACE] SCOUNDREL.
+    \nVitality: [VITALITY]
+    \nArmor: [ARMOR]
+    \nThey are [an enemy/not an enemy].
+    \nDagger: [DAGGER]
+    \nFaction: [FACTION]
+    \nDisguise: [TRUE/FALSE]
+    \n\n"
+    
+    Example:
+    FLEA is a Level 4 DWARF SCOUNDREL.
+    Vitality: 6
+    Armor: 4
+    They are an enemy.
+    Dagger: ADAMANT
+    Faction: CUTPURSE
+    Disguise: TRUE
+*/
+void Scoundrel::display()
+{
+    //Standard Character display
+    std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " SCOUNDREL." << 
+    "\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
+    if(this->isEnemy()) std::cout << "They are an enemy\n";
+    else std::cout << "They are not an enemy\n";
+
+    //unique display
+    std::cout << "Dagger: " << this->getDagger() <<
+    "\nFaction: " << this->getFaction() << std::endl;
+
+    if(this->hasDisguise()) std::cout << "Disguise: TRUE\n" << std::endl;
+    else std::cout << "Disguise: FALSE\n" << std::endl;
+}
+
+//for random number
+#include <stdlib.h>
+#include <time.h>  
+/**
+     @post: 
+    If the character is UNDEAD, gain 3 Vitality points. Nothing else happens. 
+    
+    If the character is NOT UNDEAD, their Vitality is set to 1. 
+    In addition, as a Scoundrel: If the character is of the CUTPURSE faction, they steal a health potion and recover 3 Vitality points. 
+    If they are of the SILVERTONGUE faction, they talk the cook into redoing their stew as follows: they have a 70% chance of recovering 4 Vitality points, but a 30% chance of resetting their Vitality to 1, and they lose their daggers, which are replaced with WOOD daggers. (If their daggers were already WOOD, nothing happens to the daggers). 
+*/
+void Scoundrel::eatTaintedStew()
+{
+    //first if is standard effects(based on race not class)
+    if(this->getRace() == "UNDEAD") this->setVitality(this->getVitality() + 3);
+    else 
+    {
+        this->setVitality(1);
+
+        //unique effects
+        if(this->getFaction() == "CUTPURSE") this->setVitality(this->getVitality() + 3);
+        else if(this->getFaction() == "SILVERTONGUE") 
+        {
+            srand (time(NULL));
+            int randomNumber = rand() % 10;
+            std::cout << randomNumber << std::endl;
+            //first if is 70% gain 4 hp
+            if(randomNumber < 7) this->setVitality(this->getVitality() + 4);
+            else//30% lose ya stuff
+            {
+                this->setDagger("WOOD");
+            }
+        }
+    }
+    
+}

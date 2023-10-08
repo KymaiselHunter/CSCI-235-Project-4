@@ -164,7 +164,7 @@ void Barbarian::toggleEnrage()
 void Barbarian::display()
 {
     //standard character display
-    std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << 
+    std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " BARBARIAN." << 
     ".\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
     if(this->isEnemy()) std::cout << "They are an enemy\n";
     else std::cout << "They are not an enemy\n";
@@ -189,13 +189,16 @@ void Barbarian::display()
 */
 void Barbarian::eatTaintedStew()
 {
-    //non unique effects(based on race not class)
+    //non unique effects(based on race[undead] not class)
     if(this->getRace() == "UNDEAD") this->setVitality(this->getVitality() + 3);
-    else this->setVitality(1);
+    else
+    {
+        this->setVitality(1);
 
-    //unique effects
-    this->toggleEnrage();
+        //unique effects
+        this->toggleEnrage();
 
-    if(this->getEnrage()) this->setSecondaryWeapon("TABLE");
-    else this->setMainWeapon("BUCKET");
+        if(this->getEnrage()) this->setSecondaryWeapon("TABLE");
+        else this->setMainWeapon("BUCKET");
+    }
 }

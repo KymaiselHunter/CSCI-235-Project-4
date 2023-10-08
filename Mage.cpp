@@ -166,7 +166,7 @@ bool Mage::hasIncarnateSummon() const
 void Mage::display()
 {
     //Standard Character display
-    std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << 
+    std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " MAGE." << 
     ".\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
     if(this->isEnemy()) std::cout << "They are an enemy\n";
     else std::cout << "They are not an enemy\n";
@@ -190,13 +190,17 @@ void Mage::display()
 */
 void Mage::eatTaintedStew()
 {
-    //non unique effects(based on race not class)
+    //first if is standard effects(based on race not class)
     if(this->getRace() == "UNDEAD") this->setVitality(this->getVitality() + 3);
-    else this->setVitality(1);
+    else 
+    {
+        this->setVitality(1);
 
-    //unique effects
-    if(this->getCastingWeapon() == "STAFF") this->setVitality(this->getVitality() + 3);
-    else if(this->getCastingWeapon() == "WAND") this->setVitality(this->getVitality() + 2);
+        //unique effects
+        if(this->getCastingWeapon() == "STAFF") this->setVitality(this->getVitality() + 3);
+        else if(this->getCastingWeapon() == "WAND") this->setVitality(this->getVitality() + 2);
 
-    if(this->hasIncarnateSummon()) this->setVitality(this->getVitality() + 1);
+        if(this->hasIncarnateSummon()) this->setVitality(this->getVitality() + 1);
+    }
+    
 }

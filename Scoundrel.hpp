@@ -102,6 +102,39 @@ class Scoundrel : public Character
        @return  : the visual aid flag
       **/
       bool hasDisguise() const;
+
+      //virtual function overrides
+        /**
+          @post     : displays Scoundrel data in the form:
+          "[NAME] is a Level [LEVEL] [RACE] SCOUNDREL.
+          \nVitality: [VITALITY]
+          \nArmor: [ARMOR]
+          \nThey are [an enemy/not an enemy].
+          \nDagger: [DAGGER]
+          \nFaction: [FACTION]
+          \nDisguise: [TRUE/FALSE]
+          \n\n"
+          
+          Example:
+          FLEA is a Level 4 DWARF SCOUNDREL.
+          Vitality: 6
+          Armor: 4
+          They are an enemy.
+          Dagger: ADAMANT
+          Faction: CUTPURSE
+          Disguise: TRUE
+      */
+        void display();
+
+        /**
+          @post: 
+          If the character is UNDEAD, gain 3 Vitality points. Nothing else happens. 
+          
+          If the character is NOT UNDEAD, their Vitality is set to 1. 
+          In addition, as a Scoundrel: If the character is of the CUTPURSE faction, they steal a health potion and recover 3 Vitality points. 
+          If they are of the SILVERTONGUE faction, they talk the cook into redoing their stew as follows: they have a 70% chance of recovering 4 Vitality points, but a 30% chance of resetting their Vitality to 1, and they lose their daggers, which are replaced with WOOD daggers. (If their daggers were already WOOD, nothing happens to the daggers). 
+      */
+        void eatTaintedStew();
 };
 
 #endif

@@ -9,6 +9,7 @@ using namespace std;
 #include "Barbarian.hpp"
 #include "Mage.hpp"
 #include "Ranger.hpp"
+#include "Scoundrel.hpp"
 
 int main()
 {
@@ -66,7 +67,7 @@ int main()
     r1->display();
     
     cout << "Normal ranger with poision affininity" << endl;
-    Character *r2 = new Ranger("KYLE", "DWARF", 9, 4, 6, false, testQuiver, testAffinities, true);
+    Character *r2 = new Ranger("NUSY", "DWARF", 9, 4, 6, false, testQuiver, testAffinities, true);
     r2->display();
 
     cout << "Tainted Normal ranger" << endl;
@@ -75,5 +76,19 @@ int main()
 
     //test Scoundrel
     cout << "======================================" << endl;
+    cout << "Test given Scoundrel(Cutpurse)" << endl;
+    Character * s1 = new Scoundrel("FLEA", "DWARF", 6, 4, 4, true, "ADAMANT", "Cutpurse", true);
+    s1->display();
 
+    cout << "Test tainted given Scoundrel(Cutpurse)" << endl;
+    s1->eatTaintedStew();
+    s1->display();
+
+    cout << "Test Scoundrel(SIlver tongue)" << endl;
+    Character * s2 = new Scoundrel("DAKOTA", "LIZARD", 6, 4, 4, true, "ADAMANT", "SILVERTONGUE", true);
+    s2->display();
+
+    cout << "Test tainted Scoundrel(SIlver tongue)" << endl;
+    s2->eatTaintedStew();
+    s2->display();
 }
