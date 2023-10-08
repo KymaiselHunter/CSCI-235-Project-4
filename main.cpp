@@ -10,7 +10,7 @@ using namespace std;
 #include "Mage.hpp"
 #include "Ranger.hpp"
 #include "Scoundrel.hpp"
-//#include "Tavern.hpp"
+#include "Tavern.hpp"
 
 int main()
 {
@@ -98,29 +98,29 @@ int main()
     cout << "======================================" << endl;
     //task 2 builds off of previous charcter pointer so do not run without previous code
 
-    // Tavern t;
+    Tavern t;
 
-    // cout << "Initial empty tavern:" << endl;
-    // t.tavernReport();
+    cout << "Initial empty tavern:" << endl;
+    t.tavernReport();
 
-    // t.enterTavern(b1);
-    // t.enterTavern(m1);
-    // t.enterTavern(r1);
-    // t.enterTavern(r2);
-    // t.enterTavern(s1);
-    // t.enterTavern(s2);
+    t.enterTavern(b1);
+    t.enterTavern(m1);
+    t.enterTavern(r1);
+    t.enterTavern(r2);
+    t.enterTavern(s1);
+    t.enterTavern(s2);
 
-    // cout << "\nFilled tavern: " << endl;
-    // t.tavernReport();
+    cout << "\nFilled tavern: " << endl;
+    t.tavernReport();
 
-    // cout << "\nEverybody Leaves the tavern:" << endl;
+    cout << "\nEverybody Leaves the tavern:" << endl;
 
-    // t.enterTavern(b1);
-    // t.enterTavern(m1);
-    // t.enterTavern(r1);
-    // t.enterTavern(r2);
-    // t.enterTavern(s1);
-    // t.enterTavern(s2);
+    t.enterTavern(b1);
+    t.enterTavern(m1);
+    t.enterTavern(r1);
+    t.enterTavern(r2);
+    t.enterTavern(s1);
+    t.enterTavern(s2);
         
-    // t.tavernReport();
+    t.tavernReport();
 }
