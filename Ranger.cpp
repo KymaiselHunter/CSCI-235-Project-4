@@ -206,3 +206,87 @@ bool Ranger::getCompanion() const
 {
     return has_companion_;
 } 
+
+
+//virtual function overrides
+/**
+    @post     : displays Ranger data in the form:
+    "[NAME] is a Level [LEVEL] [RACE] RANGER.
+    \nVitality: [VITALITY]
+    \nArmor: [ARMOR]
+    \nThey are [an enemy/not an enemy].
+    \nAnimal Companion: [TRUE/FALSE]
+    \nArrows:
+    \n[ARROW TYPE]: [QUANTITY]
+    \nAffinities: [AFFINITY1], [AFFINITY2],..., [AFFINITYN]
+    \n\n"
+    
+    Example:
+    MARROW is a Level 6 UNDEAD RANGER.
+    Vitality: 9
+    Armor: 4
+    They are not an enemy.
+    Animal Companion: TRUE
+    Arrows:
+    WOOD: 30
+    FIRE: 5
+    Affinities: FIRE, POISON
+*/
+void Ranger::display()
+{
+    //Standard Character display
+    std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << 
+    ".\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
+    if(this->isEnemy()) std::cout << "They are an enemy\n";
+    else std::cout << "They are not an enemy\n";
+
+    //unique display
+    if(this->getCompanion()) std::cout << "Animal Companion: TRUE\n";
+    else std::cout << "Animal Companion: FALSE\n";
+
+    std::cout << "Arrows:" << std::endl;
+    for(size_t i = 0; i < arrows_.size(); i++)
+    {
+        std::cout << arrows_[i].type_ << ": " << arrows_[i].quantity_ << std::endl;
+    }
+    
+    std::cout << "Affinities: ";
+    for(size_t i = 0; i < affinities_.size()-1; i++)
+    {
+        std::cout << affinities_[i] << ", ";
+    }
+    std::cout << affinities_[affinities_.size()-1] << "\n" << std::endl;
+}
+
+/**
+    @post: 
+    If the character is UNDEAD, gain 3 Vitality points. Nothing else happens. 
+
+    If the character is NOT UNDEAD and, as a Ranger has POISON affinity, their Vitality is halved (round down to the nearest integer).
+    Otherwise (not UNDEAD and not POISON affinity), their Vitality is set to 1.
+    Whether the not UNDEAD Ranger has POISON affinity or not, if they have an animal companion, the emotional support allows the character to recover 1 Vitality point. 
+*/
+void Ranger::eatTaintedStew()
+{
+    //standard effects(based on race not class)
+    //else for this is unique as ranger's vitality is affected by affinities
+    if(this->getRace() == "UNDEAD") this->setVitality(this->getVitality() + 3);
+    else//unique effects
+    {
+        bool hasPoisonAffinitiy = false;
+
+        for(size_t i = 0; i < affinities_.size(); i++)
+        {
+            if(affinities_[i] == "POISON")
+            {
+                hasPoisonAffinitiy = true;
+                break;
+            }
+        }
+        std::cout << " test" <<this->getVitality()/2 << std::endl;
+        if(hasPoisonAffinitiy) this->setVitality(this->getVitality()/2);
+        else this->setVitality(1);
+
+        if(this->getCompanion()) this->setVitality(this->getVitality()+1);
+    }
+}

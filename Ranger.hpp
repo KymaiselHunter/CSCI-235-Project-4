@@ -118,6 +118,42 @@ class Ranger : public Character
             @return  : a boolean indicating whether the character is able to recruit an animal companion
         **/
         bool getCompanion() const;
+
+        //virtual function overrides
+        /**
+            @post     : displays Ranger data in the form:
+            "[NAME] is a Level [LEVEL] [RACE] RANGER.
+            \nVitality: [VITALITY]
+            \nArmor: [ARMOR]
+            \nThey are [an enemy/not an enemy].
+            \nAnimal Companion: [TRUE/FALSE]
+            \nArrows:
+            \n[ARROW TYPE]: [QUANTITY]
+            \nAffinities: [AFFINITY1], [AFFINITY2],..., [AFFINITYN]
+            \n\n"
+            
+            Example:
+            MARROW is a Level 6 UNDEAD RANGER.
+            Vitality: 9
+            Armor: 4
+            They are not an enemy.
+            Animal Companion: TRUE
+            Arrows:
+            WOOD: 30
+            FIRE: 5
+            Affinities: FIRE, POISON
+        */
+        void display();
+
+        /**
+            @post: 
+            If the character is UNDEAD, gain 3 Vitality points. Nothing else happens. 
+
+            If the character is NOT UNDEAD and, as a Ranger has POISON affinity, their Vitality is halved (round down to the nearest integer).
+            Otherwise (not UNDEAD and not POISON affinity), their Vitality is set to 1.
+            Whether the not UNDEAD Ranger has POISON affinity or not, if they have an animal companion, the emotional support allows the character to recover 1 Vitality point. 
+        */
+        void eatTaintedStew();
 };
 
 #endif

@@ -8,6 +8,7 @@ using namespace std;
 #include "Character.hpp"
 #include "Barbarian.hpp"
 #include "Mage.hpp"
+#include "Ranger.hpp"
 
 int main()
 {
@@ -37,4 +38,42 @@ int main()
     cout << "Tainted Barbarian: " << endl;
     m1->eatTaintedStew();
     m1->display();
+
+    //test ranger
+    cout << "======================================" << endl;
+    Arrows testArrow1;
+    testArrow1.type_ = "Wood";
+    testArrow1.quantity_ = 30;
+
+    Arrows testArrow2;
+    testArrow2.type_ = "Fire";
+    testArrow2.quantity_ = 5;
+
+    vector<Arrows> testQuiver;
+    testQuiver.push_back(testArrow1);
+    testQuiver.push_back(testArrow2);
+
+    vector<string> testAffinities;
+    testAffinities.push_back("FIRE");
+    testAffinities.push_back("Poison");
+
+    cout << "UNDEAD Ranger" << endl;
+    Character *r1 = new Ranger("MARROW", "UNDEAD", 9, 4, 6, false, testQuiver, testAffinities, true);
+    r1->display();
+
+    cout << "tainted UNDEAD Ranger" << endl;
+    r1->eatTaintedStew();
+    r1->display();
+    
+    cout << "Normal ranger with poision affininity" << endl;
+    Character *r2 = new Ranger("KYLE", "DWARF", 9, 4, 6, false, testQuiver, testAffinities, true);
+    r2->display();
+
+    cout << "Tainted Normal ranger" << endl;
+    r2->eatTaintedStew();
+    r2->display();
+
+    //test Scoundrel
+    cout << "======================================" << endl;
+
 }
