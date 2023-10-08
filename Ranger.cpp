@@ -43,7 +43,8 @@ Ranger::Ranger(const std::string& name, const std::string& race, int vitality, i
     setArrows(arrows);
     for (std::string affinity : affinities)
     {
-        bool add_affinity = addAffinity(affinity);
+        //bool add_affinity = addAffinity(affinity);
+        addAffinity(affinity);
     }
 }
 
@@ -55,7 +56,8 @@ void Ranger::setArrows(const std::vector<Arrows>& arrows)
 {
     for(Arrows arrow : arrows)
     {
-        bool add_arrow = addArrows(arrow.type_, arrow.quantity_);
+        //bool add_arrow = addArrows(arrow.type_, arrow.quantity_);
+        addArrows(arrow.type_, arrow.quantity_);
     }
 }
 
@@ -83,7 +85,7 @@ bool Ranger::addArrows(const std::string& type, const int& quantity)
 {
     std::string type_upper = type;
     //turn type to uppercase
-    for(int i = 0; i<type_upper.size(); i++)
+    for(size_t i = 0; i<type_upper.size(); i++)
     {
         if(isalpha(type_upper[i]))
         {
@@ -96,7 +98,7 @@ bool Ranger::addArrows(const std::string& type, const int& quantity)
         return false;
     }
     //check if type already exists and increment
-     for (int i = 0; i < arrows_.size(); i++)
+     for (size_t i = 0; i < arrows_.size(); i++)
      {
         if(arrows_[i].type_ == type_upper)
         {
@@ -156,7 +158,7 @@ bool Ranger::addAffinity(const std::string& affinity)
 {
     std::string aff_upper = affinity;
     //convert to uppercase
-    for(int i = 0; i<aff_upper.size();i++)
+    for(size_t i = 0; i<aff_upper.size();i++)
     {
         if(isalpha(aff_upper[i]))
         {

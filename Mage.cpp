@@ -61,7 +61,7 @@ Mage::Mage(const std::string& name, const std::string& race, int vitality, int a
 bool Mage::setSchool(const std::string& school_of_magic)
 {
     std::string school_upper = school_of_magic;
-    for(int i = 0;i<school_of_magic.size();i++)
+    for(size_t i = 0;i<school_of_magic.size();i++)
     {
         if(isalpha(school_of_magic[i]))
         {
@@ -99,7 +99,7 @@ std::string Mage::getSchool() const
 bool Mage::setCastingWeapon(const std::string& weapon)
 {
     std::string weapon_upper = weapon;
-    for(int i = 0;i<weapon.size();i++)
+    for(size_t i = 0;i<weapon.size();i++)
     {
         if(isalpha(weapon[i]))
         {

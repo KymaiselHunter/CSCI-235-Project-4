@@ -59,7 +59,7 @@ Barbarian::Barbarian(const std::string& name, const std::string& race, int vital
 bool Barbarian::setMainWeapon(const std::string& main_weapon)
 {
     std::string temp = main_weapon;
-    for (int i = 0; i < temp.length(); i++)
+    for (size_t i = 0; i < temp.length(); i++)
     {
         if (!isalpha(temp[i]))
         {
@@ -92,7 +92,7 @@ std::string Barbarian::getMainWeapon() const
 bool Barbarian::setSecondaryWeapon(const std::string& secondary_weapon)
 {
     std::string temp = secondary_weapon;
-    for (int i = 0; i < temp.length(); i++)
+    for (size_t i = 0; i < temp.length(); i++)
     {
         if (!isalpha(temp[i]))
         {

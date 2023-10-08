@@ -58,7 +58,7 @@ Scoundrel::Scoundrel(const std::string& name, const std::string& race, int vital
 void Scoundrel::setDagger(const std::string& dagger)
 {
     std::string dagger_upper = dagger;
-    for(int i = 0; i < dagger_upper.length(); i++)
+    for(size_t i = 0; i < dagger_upper.length(); i++)
     {
         if(isalpha(dagger_upper[i]))
         {
@@ -145,7 +145,7 @@ std::string Scoundrel::getDagger() const
 bool Scoundrel::setFaction(const std::string& faction)
 {
     std::string faction_upper = faction;
-    for(int i = 0; i < faction_upper.length(); i++)
+    for(size_t i = 0; i < faction_upper.length(); i++)
     {
         if(isalpha(faction_upper[i]))
         {
@@ -252,7 +252,7 @@ void Scoundrel::eatTaintedStew()
         {
             srand (time(NULL));
             int randomNumber = rand() % 10;
-            std::cout << randomNumber << std::endl;
+            //std::cout << randomNumber << std::endl;
             //first if is 70% gain 4 hp
             if(randomNumber < 7) this->setVitality(this->getVitality() + 4);
             else//30% lose ya stuff
