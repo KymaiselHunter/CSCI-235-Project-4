@@ -115,12 +115,19 @@ int main()
 
     cout << "\nEverybody Leaves the tavern:" << endl;
 
-    t.enterTavern(b1);
-    t.enterTavern(m1);
-    t.enterTavern(r1);
-    t.enterTavern(r2);
-    t.enterTavern(s1);
-    t.enterTavern(s2);
+    t.exitTavern(b1);
+    t.exitTavern(m1);
+    t.exitTavern(r1);
+    t.exitTavern(r2);
+    t.exitTavern(s1);
+    t.exitTavern(s2);
         
     t.tavernReport();
+
+    cout << "======================================" << endl;
+    cout << "Test input file" << endl;
+    cout << "======================================" << endl;
+
+    //requires a seperate text document named "CharacterList.txt"
+    Tavern t2("CharacterList.txt");
 }

@@ -19,6 +19,26 @@ class Tavern : public ArrayBag<Character*>{
   public:
     /** Default Constructor **/
     Tavern(); 
+    
+    //Paramterized Constructor
+    /**
+    @param: the name of an input file
+    @pre: Formatting of the csv file is as follows (each numbered item appears separated by comma, only one value for each numbered item):
+    1. Name: An uppercase string
+    2. Race: An uppercase string [HUMAN, ELF, DWARF, LIZARD, UNDEAD]
+    3. Subclass: An uppercase string [BARBARIAN, MAGE, SCOUNDREL, RANGER]
+    4. Level/Vitality/Armor: A positive integer
+    5. Enemy: 0 (False) or 1 (True)
+    6. Main: Uppercase string or strings representing the main weapon (Barbarian and Mage), Dagger type (Scoundrel), or arrows (Ranger). A ranger's arrows are of the form [TYPE] [QUANTITY];[TYPE] [QUANTITY], where each arrow type is separated by a semicolon, and the type and its quantity are separated with a space.
+    7. Offhand: An uppercase string that is only applicable to Barbarians, and may be NONE if the Barbarian does not have an offhand weapon, or if the character is of a different subclass.
+    8. School/Faction: Uppercase strings that represent a Mage's school of magic: [ELEMENTAL, NECROMANCY, ILLUSION] or a Scoundrel's faction: [CUTPURSE, SHADOWBLADE, SILVERTONGUE], and NONE where not applicable
+    9. Summoning: 0 (False) or 1 (True), only applicable to Mages (summoning an Incarnate) and Rangers (Having an Animal Companion)
+    10. Affinity: Only applicable to Rangers. Affinities are of the form [AFFINITY1];[AFFINITY2] where multiple affinities are separated by a semicolon. Th value may be NONE for a Ranger with no affinities, or characters of other subclasses.
+    11. Disguise: 0 (False) or 1 (True), only applicable to Scoundrels, representing if they have a disguise.
+    12. Enraged: 0 (False) or 1 (True), only applicable to Barbarians, representing if they are enraged.
+        @post: Each line of the input file corresponds to a Character subclass and dynamically allocates Character derived objects, adding them to the Tavern.
+    */
+    Tavern(const std::string pFileName);
 
     /** 
         @param:   A reference(changed to pointer) to a Character entering the Tavern
