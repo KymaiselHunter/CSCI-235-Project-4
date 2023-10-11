@@ -113,14 +113,54 @@ int main()
     cout << "\nFilled tavern: " << endl;
     t.tavernReport();
 
-    cout << "\nEverybody Leaves the tavern:" << endl;
+    // cout << "\nEverybody Leaves the tavern:" << endl;
 
-    t.exitTavern(b1);
-    t.exitTavern(m1);
-    t.exitTavern(r1);
-    t.exitTavern(r2);
-    t.exitTavern(s1);
-    t.exitTavern(s2);
+    // t.exitTavern(b1);
+    // t.exitTavern(m1);
+    // t.exitTavern(r1);
+    // t.exitTavern(r2);
+    // t.exitTavern(s1);
+    // t.exitTavern(s2);
         
-    t.tavernReport();
+    // t.tavernReport();
+
+    cout << "======================================" << endl;
+    cout << "Tavern display" << endl;
+    cout << "======================================" << endl;
+
+    t.displayCharacters();
+
+    cout << "======================================" << endl;
+    cout << "Test input file" << endl;
+    cout << "======================================" << endl;
+
+    //requires a seperate text document named "CharacterList.txt"
+    Tavern t2("CharacterList.txt");
+
+    //KYLE,DWARF,MAGE,5,0,STAFF,NONE,NECROMANCY,1,NONE,0,0
+    //NUSY,DWARF,RANGER,5,1,FIRE 20;POISON 50,NONE,NONE,1,BLOOD;FIRE;POISON,0,0
+    //DAKOTA,LIZARD,SCOUNDREL,5,0,MITHRIL,NONE,SHADOWBLADE,0,NONE,1,0
+    //FRANK,HUMAN,BARBARIAN,5,0,SPEAR,SHOTPUT,NONE,0,NONE,NONE,1
+
+    t2.displayCharacters();
+    
+    cout << "======================================" << endl;
+    cout << "DisplayRace" << endl;
+    cout << "======================================" << endl;
+
+    t2.displayRace("DWARF");
+
+    cout << "======================================" << endl;
+    cout << "taintedStew" << endl;
+    cout << "======================================" << endl;
+    cout << "b4 taintedStew" << endl;
+
+    t2.displayCharacters();
+
+    cout << "======================================" << endl;
+    cout << "After taintedStew" << endl;
+
+    t2.taintedStew();
+//cout << "wehre??" << endl;
+    t2.displayCharacters();
 }

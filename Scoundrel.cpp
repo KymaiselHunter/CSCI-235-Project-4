@@ -211,7 +211,7 @@ bool Scoundrel::hasDisguise() const
     Faction: CUTPURSE
     Disguise: TRUE
 */
-void Scoundrel::display()
+void Scoundrel::display() const
 {
     //Standard Character display
     std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " SCOUNDREL." << 

@@ -112,7 +112,7 @@ class Barbarian : public Character
             Offhand Weapon: ANOTHERMACE
             Enraged: TRUE 
         */
-        void display();
+        void display() const;
 
         /**
             @post: 

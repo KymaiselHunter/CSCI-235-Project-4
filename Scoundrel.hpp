@@ -124,7 +124,7 @@ class Scoundrel : public Character
           Faction: CUTPURSE
           Disguise: TRUE
       */
-        void display();
+        void display() const;
 
         /**
           @post: 

@@ -12,7 +12,193 @@ Tavern::Tavern() : ArrayBag<Character*>(), level_sum_{0}, num_enemies_{0}
 {
 }
 
+//include for taking a file
+#include <fstream>
+//include for storing info
+#include <vector>
 
+//Paremeterized Constructor
+/**
+    @param: the name of an input file
+    @pre: Formatting of the csv file is as follows (each numbered item appears separated by comma, only one value for each numbered item):
+1. Name: An uppercase string
+2. Race: An uppercase string [HUMAN, ELF, DWARF, LIZARD, UNDEAD]
+3. Subclass: An uppercase string [BARBARIAN, MAGE, SCOUNDREL, RANGER]
+4. Level/Vitality/Armor: A positive integer
+5. Enemy: 0 (False) or 1 (True)
+6. Main: Uppercase string or strings representing the main weapon (Barbarian and Mage), Dagger type (Scoundrel), or arrows (Ranger). A ranger's arrows are of the form [TYPE] [QUANTITY];[TYPE] [QUANTITY], where each arrow type is separated by a semicolon, and the type and its quantity are separated with a space.
+7. Offhand: An uppercase string that is only applicable to Barbarians, and may be NONE if the Barbarian does not have an offhand weapon, or if the character is of a different subclass.
+8. School/Faction: Uppercase strings that represent a Mage's school of magic: [ELEMENTAL, NECROMANCY, ILLUSION] or a Scoundrel's faction: [CUTPURSE, SHADOWBLADE, SILVERTONGUE], and NONE where not applicable
+9. Summoning: 0 (False) or 1 (True), only applicable to Mages (summoning an Incarnate) and Rangers (Having an Animal Companion)
+10. Affinity: Only applicable to Rangers. Affinities are of the form [AFFINITY1];[AFFINITY2] where multiple affinities are separated by a semicolon. Th value may be NONE for a Ranger with no affinities, or characters of other subclasses.
+11. Disguise: 0 (False) or 1 (True), only applicable to Scoundrels, representing if they have a disguise.
+12. Enraged: 0 (False) or 1 (True), only applicable to Barbarians, representing if they are enraged.
+    @post: Each line of the input file corresponds to a Character subclass and dynamically allocates Character derived objects, adding them to the Tavern.
+*/
+Tavern::Tavern(std::string pFileName)
+{
+  //get access to file
+  std::ifstream tavernParameters;
+  
+  //if file name wrong or file does not exist, file not found
+  try
+  {
+    tavernParameters.open(pFileName);
+
+    if(!tavernParameters.is_open()) throw 404;
+  }
+  catch(int x)
+  {
+    std::cout << "File Not Found";
+  }
+
+  //now loop through the file to get information for characters
+  //use exception if the information in the file is formated wrong
+  //get information and put it into a 2d matrix
+  //if not enough info throw error
+  std::vector<std::vector<std::string>> fileToMatrix;
+
+  try
+  {
+    std::string line;
+    while(getline(tavernParameters, line))
+    {
+      //std::cout << "line : "<< line << std::endl;
+      //loop to get info from line
+      std::vector<std::string> lineInformation;
+
+      while(line.find(",") != -1)
+      {
+        lineInformation.push_back(line.substr(0, line.find(",")));
+        line = line.substr(line.find(",") + 1);
+      }
+      lineInformation.push_back(line);
+
+      if(lineInformation.size() != 12) throw 12;
+
+      //send vector of info to matrix
+      fileToMatrix.push_back(lineInformation);
+    }
+  }
+  catch(int x)
+  {
+    std::cout << "Incorrect amount of information in line";
+  }
+  catch(...)
+  {
+    std::cout << "Unknown File to character error";
+  }
+  
+  //dynamic allocation
+  //for dynamic allocation, get size
+  int amountOfCharacters = fileToMatrix.size();
+
+  //dynamically allocated array
+  //array of pointers
+  Character** c = new Character*[amountOfCharacters];
+
+  //create characters
+  //exception if input is off
+  try 
+  {
+    //do for each line to get each char info
+    for(int i = 0; i < amountOfCharacters; i++)
+    {
+      std::vector<std::string> lineInformation = fileToMatrix[i];
+      if(lineInformation[2] == "BARBARIAN")
+      {
+        c[i] = new Barbarian(lineInformation[0], lineInformation[1], 
+        std::stoi(lineInformation[3]), std::stoi(lineInformation[3]), std::stoi(lineInformation[3]),
+        std::stoi(lineInformation[4]), lineInformation[5], lineInformation[6],
+        std::stoi(lineInformation[11]));
+        //Character *b1 = new Barbarian("BONK", "HUMAN", 11, 5, 5, true, "MACE", "ANOTHERMACE", true);  
+      }
+      else if(lineInformation[2] == "MAGE")
+      {
+        c[i] = new Mage(lineInformation[0], lineInformation[1], 
+        std::stoi(lineInformation[3]), std::stoi(lineInformation[3]), std::stoi(lineInformation[3]),
+        std::stoi(lineInformation[4]), lineInformation[7], lineInformation[5],
+        std::stoi(lineInformation[8]));
+      }
+      else if(lineInformation[2] == "SCOUNDREL")
+      {
+        c[i] = new Scoundrel(lineInformation[0], lineInformation[1], 
+        std::stoi(lineInformation[3]), std::stoi(lineInformation[3]), std::stoi(lineInformation[3]),
+        std::stoi(lineInformation[4]), lineInformation[5], lineInformation[7],
+        std::stoi(lineInformation[10]));
+      }
+      else if(lineInformation[2] == "RANGER")
+      {
+        std::vector<std::string> affinities;
+        
+        //if they have affinities, if not, the vect will be empty
+        if(lineInformation[9] != "NONE")
+        {
+          //while loop to go through the affinities list and add them to vect
+          //substr to remove added affinities
+          while(lineInformation[9].find(";")!=-1)
+          {
+            affinities.push_back(lineInformation[9].substr(0,lineInformation[9].find(";")));
+            lineInformation[9] = lineInformation[9].substr(lineInformation[9].find(";")+1);
+            //std::cout << "issue here? : " << lineInformation[9]<<std::endl;
+          }
+          //add last affinity after semi colon
+          affinities.push_back(lineInformation[9]);
+        }
+
+        std::vector<Arrows> arrows;
+
+        if(lineInformation[5] != "NONE")
+        {
+          //while loop to go through the arrow list and add them to vect
+          //substr to remove added arrow
+          //use the space to differ between type and quantity
+          while(lineInformation[5].find(";")!=-1)
+          {
+            Arrows a;
+            a.type_ = lineInformation[5].substr(0,lineInformation[5].find(" "));
+            a.quantity_ = std::stoi(lineInformation[5].substr(lineInformation[5].find(" ") + 1, 
+            lineInformation[5].find(";") - lineInformation[5].find(" ") + 1));
+
+            arrows.push_back(a);
+            lineInformation[5] = lineInformation[5].substr(lineInformation[5].find(";")+1);
+            //std::cout << "issue here? : " << lineInformation[5]<<std::endl;
+          }
+          //add last arrow after semi colon
+          Arrows a;
+          a.type_ = lineInformation[5].substr(0,lineInformation[5].find(" "));
+          a.quantity_ = std::stoi(lineInformation[5].substr(lineInformation[5].find(" ") + 1, 
+          lineInformation[5].find(";") - lineInformation[5].find(" ") + 1));
+
+          arrows.push_back(a);
+          lineInformation[5] = lineInformation[5].substr(lineInformation[5].find(";")+1);
+        }
+
+        c[i] = new Ranger(lineInformation[0], lineInformation[1], 
+        std::stoi(lineInformation[3]), std::stoi(lineInformation[3]), std::stoi(lineInformation[3]),
+        std::stoi(lineInformation[4]), arrows, affinities,
+        std::stoi(lineInformation[8]));
+      }
+      else throw "Invalid Input";
+    }
+  }
+  catch(...)
+  {
+    std::cout << "Unknown Error when constructing characters";
+  }
+
+  //have the characters enter the tavern
+  for(int i = 0; i < amountOfCharacters; i++)
+  {
+    this->enterTavern(c[i]);
+  }
+
+  //now that they entered, deal with array to avoid memory leak
+  delete [] c;
+  c = nullptr;
+
+  tavernParameters.close();
+}
 
 /** 
     @param:   A reference to a Character(changed to pointer)  entering the Tavern
@@ -149,4 +335,39 @@ void Tavern::tavernReport()
   std::cout << "Undead: " << undead << std::endl;
   std::cout << "\nThe average level is: " << calculateAvgLevel() << std::endl;
   std::cout << std::fixed << std::setprecision(2) << calculateEnemyPercentage() << "% are enemies.\n\n";
+}
+
+/**
+    @post: For every character in the tavern, displays each character's information
+*/
+void Tavern::displayCharacters() const
+{
+  for(int i = 0; i < this->getCurrentSize(); i++)
+  {
+    this->items_[i]->display();
+  }
+}
+
+
+/**
+@param: a string reference to a race
+@post: For every character in the tavern of the given race (only exact matches to the input string), displays each character's information
+*/
+void Tavern::displayRace(const std::string &pRace) const
+{
+  for(int i = 0; i < this->getCurrentSize(); i++)
+  {
+    if(this->items_[i]->getRace() == pRace)this->items_[i]->display();
+  }
+}
+
+/**
+@post: Every character in the tavern eats a tainted stew.
+*/
+void Tavern::taintedStew() const
+{
+  for(int i = 0; i < this->getCurrentSize(); i++)
+  {
+    this->items_[i]->eatTaintedStew();
+  }
 }

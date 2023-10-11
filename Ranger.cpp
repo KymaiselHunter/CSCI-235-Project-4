@@ -234,11 +234,11 @@ bool Ranger::getCompanion() const
     FIRE: 5
     Affinities: FIRE, POISON
 */
-void Ranger::display()
+void Ranger::display() const
 {
     //Standard Character display
     std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " RANGER." << 
-    ".\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
+    "\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
     if(this->isEnemy()) std::cout << "They are an enemy\n";
     else std::cout << "They are not an enemy\n";
 
@@ -285,7 +285,7 @@ void Ranger::eatTaintedStew()
                 break;
             }
         }
-        std::cout << " test" <<this->getVitality()/2 << std::endl;
+        //std::cout << " test" <<this->getVitality()/2 << std::endl;
         if(hasPoisonAffinitiy) this->setVitality(this->getVitality()/2);
         else this->setVitality(1);
 
