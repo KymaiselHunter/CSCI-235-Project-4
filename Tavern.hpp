@@ -15,6 +15,12 @@ Tavern.hpp declares the Tavern class along with its private and public members
 #include <cmath>
 #include <iomanip>
 
+//include for subclasses
+#include "Barbarian.hpp"
+#include "Mage.hpp"
+#include "Ranger.hpp"
+#include "Scoundrel.hpp"
+
 class Tavern : public ArrayBag<Character*>{
   public:
     /** Default Constructor **/
