@@ -63,7 +63,7 @@ Tavern::Tavern(std::string pFileName)
     std::string line;
     while(getline(tavernParameters, line))
     {
-      std::cout << "line : "<< line << std::endl;
+      //std::cout << "line : "<< line << std::endl;
       //loop to get info from line
       std::vector<std::string> lineInformation;
 
@@ -130,16 +130,17 @@ Tavern::Tavern(std::string pFileName)
       else if(lineInformation[2] == "RANGER")
       {
         std::vector<std::string> affinities;
-
+        
         //if they have affinities, if not, the vect will be empty
         if(lineInformation[9] != "NONE")
         {
           //while loop to go through the affinities list and add them to vect
           //substr to remove added affinities
-          while(lineInformation[9].find(";"))
+          while(lineInformation[9].find(";")!=-1)
           {
             affinities.push_back(lineInformation[9].substr(0,lineInformation[9].find(";")));
             lineInformation[9] = lineInformation[9].substr(lineInformation[9].find(";")+1);
+            //std::cout << "issue here? : " << lineInformation[9]<<std::endl;
           }
           //add last affinity after semi colon
           affinities.push_back(lineInformation[9]);
@@ -147,12 +148,12 @@ Tavern::Tavern(std::string pFileName)
 
         std::vector<Arrows> arrows;
 
-        if(lineInformation[5] != "NONE" && lineInformation[5] != "")
+        if(lineInformation[5] != "NONE")
         {
           //while loop to go through the arrow list and add them to vect
           //substr to remove added arrow
           //use the space to differ between type and quantity
-          while(lineInformation[5].find(";"))
+          while(lineInformation[5].find(";")!=-1)
           {
             Arrows a;
             a.type_ = lineInformation[5].substr(0,lineInformation[5].find(" "));
@@ -160,7 +161,8 @@ Tavern::Tavern(std::string pFileName)
             lineInformation[5].find(";") - lineInformation[5].find(" ") + 1));
 
             arrows.push_back(a);
-            lineInformation[5] = lineInformation[5].substr(lineInformation[9].find(";")+1);
+            lineInformation[5] = lineInformation[5].substr(lineInformation[5].find(";")+1);
+            //std::cout << "issue here? : " << lineInformation[5]<<std::endl;
           }
           //add last arrow after semi colon
           Arrows a;
@@ -169,7 +171,7 @@ Tavern::Tavern(std::string pFileName)
           lineInformation[5].find(";") - lineInformation[5].find(" ") + 1));
 
           arrows.push_back(a);
-          lineInformation[5] = lineInformation[5].substr(lineInformation[9].find(";")+1);
+          lineInformation[5] = lineInformation[5].substr(lineInformation[5].find(";")+1);
         }
 
         c[i] = new Ranger(lineInformation[0], lineInformation[1], 
@@ -333,4 +335,39 @@ void Tavern::tavernReport()
   std::cout << "Undead: " << undead << std::endl;
   std::cout << "\nThe average level is: " << calculateAvgLevel() << std::endl;
   std::cout << std::fixed << std::setprecision(2) << calculateEnemyPercentage() << "% are enemies.\n\n";
+}
+
+/**
+    @post: For every character in the tavern, displays each character's information
+*/
+void Tavern::displayCharacters()
+{
+  for(int i = 0; i < this->getCurrentSize(); i++)
+  {
+    this->items_[i]->display();
+  }
+}
+
+
+/**
+@param: a string reference to a race
+@post: For every character in the tavern of the given race (only exact matches to the input string), displays each character's information
+*/
+void Tavern::displayRace(const std::string &pRace)
+{
+  for(int i = 0; i < this->getCurrentSize(); i++)
+  {
+    if(this->items_[i]->getRace() == pRace)this->items_[i]->display();
+  }
+}
+
+/**
+@post: Every character in the tavern eats a tainted stew.
+*/
+void Tavern::taintedStew()
+{
+  for(int i = 0; i < this->getCurrentSize(); i++)
+  {
+    this->items_[i]->eatTaintedStew();
+  }
 }

@@ -238,7 +238,7 @@ void Ranger::display() const
 {
     //Standard Character display
     std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " RANGER." << 
-    ".\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
+    "\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
     if(this->isEnemy()) std::cout << "They are an enemy\n";
     else std::cout << "They are not an enemy\n";
 

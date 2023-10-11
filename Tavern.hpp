@@ -116,6 +116,22 @@ class Tavern : public ArrayBag<Character*>{
     void tavernReport();
 
 
+    /**
+    @post: For every character in the tavern, displays each character's information
+    */
+    void displayCharacters();
+
+    /**
+    @param: a string reference to a race
+    @post: For every character in the tavern of the given race (only exact matches to the input string), displays each character's information
+    */
+    void displayRace(const std::string &pRace);
+
+    /**
+    @post: Every character in the tavern eats a tainted stew.
+    */
+    void Tavern::taintedStew();
+    
   private:
     int level_sum_; // An integer sum of the levels of all the characters currently in the tavern
     int num_enemies_; //number of enemies currently in the Tavern
