@@ -340,7 +340,7 @@ void Tavern::tavernReport()
 /**
     @post: For every character in the tavern, displays each character's information
 */
-void Tavern::displayCharacters()
+void Tavern::displayCharacters() const
 {
   for(int i = 0; i < this->getCurrentSize(); i++)
   {
@@ -353,7 +353,7 @@ void Tavern::displayCharacters()
 @param: a string reference to a race
 @post: For every character in the tavern of the given race (only exact matches to the input string), displays each character's information
 */
-void Tavern::displayRace(const std::string &pRace)
+void Tavern::displayRace(const std::string &pRace) const
 {
   for(int i = 0; i < this->getCurrentSize(); i++)
   {
@@ -364,7 +364,7 @@ void Tavern::displayRace(const std::string &pRace)
 /**
 @post: Every character in the tavern eats a tainted stew.
 */
-void Tavern::taintedStew()
+void Tavern::taintedStew() const
 {
   for(int i = 0; i < this->getCurrentSize(); i++)
   {

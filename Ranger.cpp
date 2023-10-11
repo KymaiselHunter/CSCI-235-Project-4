@@ -285,7 +285,7 @@ void Ranger::eatTaintedStew()
                 break;
             }
         }
-        std::cout << " test" <<this->getVitality()/2 << std::endl;
+        //std::cout << " test" <<this->getVitality()/2 << std::endl;
         if(hasPoisonAffinitiy) this->setVitality(this->getVitality()/2);
         else this->setVitality(1);
 
