@@ -168,8 +168,8 @@ void Mage::display() const
     //Standard Character display
     std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " MAGE." << 
     "\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
-    if(this->isEnemy()) std::cout << "They are an enemy\n";
-    else std::cout << "They are not an enemy\n";
+    if(this->isEnemy()) std::cout << "They are an enemy.\n";
+    else std::cout << "They are not an enemy.\n";
 
     //unique display
     std::cout << "School of Magic: " << this->getSchool() <<

@@ -166,8 +166,8 @@ void Barbarian::display() const
     //standard character display
     std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " BARBARIAN." << 
     "\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
-    if(this->isEnemy()) std::cout << "They are an enemy\n";
-    else std::cout << "They are not an enemy\n";
+    if(this->isEnemy()) std::cout << "They are an enemy.\n";
+    else std::cout << "They are not an enemy.\n";
 
     //unique display
     std::cout << "Main Weapon: " << this->getMainWeapon() <<

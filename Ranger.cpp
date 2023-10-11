@@ -239,8 +239,8 @@ void Ranger::display() const //override
     //Standard Character display
     std::cout << this->getName() << " is a Level " << this->getLevel() << " " << this->getRace() << " RANGER." << 
     "\nVitality: " << this->getVitality() << "\nArmor: " << this->getArmor() << std::endl;
-    if(this->isEnemy()) std::cout << "They are an enemy\n";
-    else std::cout << "They are not an enemy\n";
+    if(this->isEnemy()) std::cout << "They are an enemy.\n";
+    else std::cout << "They are not an enemy.\n";
 
     //unique display
     if(this->getCompanion()) std::cout << "Animal Companion: TRUE\n";
