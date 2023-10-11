@@ -143,7 +143,7 @@ class Ranger : public Character
             FIRE: 5
             Affinities: FIRE, POISON
         */
-        void display() const;
+        void display() const override;
 
         /**
             @post: 
