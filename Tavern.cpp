@@ -359,7 +359,7 @@ void Tavern::displayRace(const std::string &pRace) const
 {
   for(int i = 0; i < this->getCurrentSize(); i++)
   {
-    if(items_[i]->getRace() == pRace)this->items_[i]->display();
+    if(items_[i]->getRace() == pRace)items_[i]->display();
   }
 }
 
