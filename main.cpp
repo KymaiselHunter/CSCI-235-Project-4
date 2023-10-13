@@ -130,9 +130,15 @@ int main()
 
     t.displayCharacters();
 
-    // cout << "======================================" << endl;
-    // cout << "Test input file" << endl;
-    // cout << "======================================" << endl;
+    cout << "======================================" << endl;
+    cout << "DisplayRace" << endl;
+    cout << "======================================" << endl;
+
+    t.displayRace("UNDEAD");
+
+    cout << "======================================" << endl;
+    cout << "Test input file" << endl;
+    cout << "======================================" << endl;
 
     //requires a seperate text document named "CharacterList.txt"
     //Tavern t2("CharacterList.txt");
@@ -145,11 +151,11 @@ int main()
 
     //t2.displayCharacters();
     
-//     cout << "======================================" << endl;
-//     cout << "DisplayRace" << endl;
-//     cout << "======================================" << endl;
+    // cout << "======================================" << endl;
+    // cout << "DisplayRace" << endl;
+    // cout << "======================================" << endl;
 
-//     t2.displayRace("DWARF");
+    // t2.displayRace("DWARF");
 
 //     cout << "======================================" << endl;
 //     cout << "taintedStew" << endl;

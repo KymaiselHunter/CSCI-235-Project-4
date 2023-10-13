@@ -61,12 +61,14 @@ Tavern::Tavern(std::string pFileName)
   try
   {
     std::string line;
+    int c;//dont add the first line
+
     while(getline(tavernParameters, line))
     {
       //std::cout << "line : "<< line << std::endl;
       //loop to get info from line
       std::vector<std::string> lineInformation;
-
+      std::cout << line << std::endl;
       while(line.find(",") != -1)
       {
         lineInformation.push_back(line.substr(0, line.find(",")));
@@ -74,8 +76,8 @@ Tavern::Tavern(std::string pFileName)
       }
       lineInformation.push_back(line);
 
-      if(lineInformation.size() != 12) throw 12;
-
+      if(c !=0 && lineInformation.size() != 12) throw 12;
+      
       //send vector of info to matrix
       fileToMatrix.push_back(lineInformation);
     }
@@ -357,7 +359,7 @@ void Tavern::displayRace(const std::string &pRace) const
 {
   for(int i = 0; i < this->getCurrentSize(); i++)
   {
-    if(this->items_[i]->getRace() == pRace)this->items_[i]->display();
+    if(items_[i]->getRace() == pRace)this->items_[i]->display();
   }
 }
 
