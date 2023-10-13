@@ -130,37 +130,38 @@ int main()
 
     t.displayCharacters();
 
-    cout << "======================================" << endl;
-    cout << "Test input file" << endl;
-    cout << "======================================" << endl;
+    // cout << "======================================" << endl;
+    // cout << "Test input file" << endl;
+    // cout << "======================================" << endl;
 
     //requires a seperate text document named "CharacterList.txt"
-    Tavern t2("CharacterList.txt");
+    //Tavern t2("CharacterList.txt");
+    //Tavern t2("characters.csv");
 
     //KYLE,DWARF,MAGE,5,0,STAFF,NONE,NECROMANCY,1,NONE,0,0
     //NUSY,DWARF,RANGER,5,1,FIRE 20;POISON 50,NONE,NONE,1,BLOOD;FIRE;POISON,0,0
     //DAKOTA,LIZARD,SCOUNDREL,5,0,MITHRIL,NONE,SHADOWBLADE,0,NONE,1,0
     //FRANK,HUMAN,BARBARIAN,5,0,SPEAR,SHOTPUT,NONE,0,NONE,NONE,1
 
-    t2.displayCharacters();
+    //t2.displayCharacters();
     
-    cout << "======================================" << endl;
-    cout << "DisplayRace" << endl;
-    cout << "======================================" << endl;
+//     cout << "======================================" << endl;
+//     cout << "DisplayRace" << endl;
+//     cout << "======================================" << endl;
 
-    t2.displayRace("DWARF");
+//     t2.displayRace("DWARF");
 
-    cout << "======================================" << endl;
-    cout << "taintedStew" << endl;
-    cout << "======================================" << endl;
-    cout << "b4 taintedStew" << endl;
+//     cout << "======================================" << endl;
+//     cout << "taintedStew" << endl;
+//     cout << "======================================" << endl;
+//     cout << "b4 taintedStew" << endl;
 
-    t2.displayCharacters();
+//     t2.displayCharacters();
 
-    cout << "======================================" << endl;
-    cout << "After taintedStew" << endl;
+//     cout << "======================================" << endl;
+//     cout << "After taintedStew" << endl;
 
-    t2.taintedStew();
-//cout << "wehre??" << endl;
-    t2.displayCharacters();
+//     t2.taintedStew();
+// //cout << "wehre??" << endl;
+//     t2.displayCharacters();
 }

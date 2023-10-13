@@ -175,8 +175,8 @@ void Mage::display() const
     std::cout << "School of Magic: " << this->getSchool() <<
     "\nWeapon: " << this->getCastingWeapon() << std::endl;
 
-    if(this->hasIncarnateSummon()) std::cout << "They can summon an Incarnate\n" << std::endl;
-    else std::cout << "They cannot summon an Incarnate\n" << std::endl;
+    if(this->hasIncarnateSummon()) std::cout << "They can summon an Incarnate.\n" << std::endl;
+    else std::cout << "They cannot summon an Incarnate.\n" << std::endl;
 }
 
 /**

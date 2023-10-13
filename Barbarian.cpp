@@ -171,7 +171,7 @@ void Barbarian::display() const
 
     //unique display
     std::cout << "Main Weapon: " << this->getMainWeapon() <<
-    "\nOFfhand Weapon: " << this->getSecondaryWeapon() << std::endl;
+    "\nOffhand Weapon: " << this->getSecondaryWeapon() << std::endl;
 
     if(this->getEnrage()) std::cout << "Enraged: TRUE\n" << std::endl;
     else std::cout << "Enraged : FALSE\n" << std::endl;
