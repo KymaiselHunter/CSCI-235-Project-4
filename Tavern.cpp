@@ -122,7 +122,7 @@ Tavern::Tavern(std::string pFileName)
       if(lineInformation[2] == "BARBARIAN")
       {
         c[i] = new Barbarian(lineInformation[0], lineInformation[1], 
-        std::stoi(lineInformation[3]), std::stoi(lineInformation[4]), std::stoi(lineInformation[5]),
+        std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
         std::stoi(lineInformation[6]), lineInformation[7], lineInformation[8],
         std::stoi(lineInformation[13]));
         //c[i]->display();
@@ -131,7 +131,7 @@ Tavern::Tavern(std::string pFileName)
       else if(lineInformation[2] == "MAGE")
       {
         c[i] = new Mage(lineInformation[0], lineInformation[1], 
-        std::stoi(lineInformation[3]), std::stoi(lineInformation[4]), std::stoi(lineInformation[5]),
+        std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
         std::stoi(lineInformation[6]), lineInformation[9], lineInformation[7],
         std::stoi(lineInformation[10]));
         //c[i]->display();
@@ -139,7 +139,7 @@ Tavern::Tavern(std::string pFileName)
       else if(lineInformation[2] == "SCOUNDREL")
       {
         c[i] = new Scoundrel(lineInformation[0], lineInformation[1], 
-        std::stoi(lineInformation[3]), std::stoi(lineInformation[4]), std::stoi(lineInformation[5]),
+        std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
         std::stoi(lineInformation[6]), lineInformation[7], lineInformation[9],
         std::stoi(lineInformation[12]));
         //c[i]->display();
@@ -214,11 +214,9 @@ Tavern::Tavern(std::string pFileName)
         // }
 
         c[i] = new Ranger(lineInformation[0], lineInformation[1], 
-        std::stoi(lineInformation[3]), std::stoi(lineInformation[4]), std::stoi(lineInformation[5]),
+        std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
         std::stoi(lineInformation[6]), arrows, affinities,
         std::stoi(lineInformation[10]));
-
-        c[i]->display();
       }
       else throw "Invalid Input";
       //std::cout << i << " " << "what the actual fuck" << std::endl;
