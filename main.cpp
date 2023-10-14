@@ -142,14 +142,14 @@ int main()
 
     //requires a seperate text document named "CharacterList.txt"
     //Tavern t2("CharacterList.txt");
-    //Tavern t2("characters.csv");
+    Tavern t2("characters.csv");
 
     //KYLE,DWARF,MAGE,5,0,STAFF,NONE,NECROMANCY,1,NONE,0,0
     //NUSY,DWARF,RANGER,5,1,FIRE 20;POISON 50,NONE,NONE,1,BLOOD;FIRE;POISON,0,0
     //DAKOTA,LIZARD,SCOUNDREL,5,0,MITHRIL,NONE,SHADOWBLADE,0,NONE,1,0
     //FRANK,HUMAN,BARBARIAN,5,0,SPEAR,SHOTPUT,NONE,0,NONE,NONE,1
 
-    //t2.displayCharacters();
+    t2.displayCharacters();
     
     // cout << "======================================" << endl;
     // cout << "DisplayRace" << endl;

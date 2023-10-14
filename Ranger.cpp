@@ -253,11 +253,15 @@ void Ranger::display() const //override
     }
     
     std::cout << "Affinities: ";
-    for(size_t i = 0; i < affinities_.size()-1; i++)
+    if(affinities_.size() > 0)
     {
-        std::cout << affinities_[i] << ", ";
+        for(size_t i = 0; i < affinities_.size()-1; i++)
+        {
+            std::cout << affinities_[i] << ", ";
+        }
+        std::cout << affinities_[affinities_.size()-1] << "\n" << std::endl;
     }
-    std::cout << affinities_[affinities_.size()-1] << "\n" << std::endl;
+    else std::cout << "\n" << std::endl;
 }
 
 /**
