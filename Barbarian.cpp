@@ -6,6 +6,10 @@ Jun 14 2023
 Barbarian.cpp defines the constructors and private and public function implementation of the Barbarian class
 */
 
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #include "Barbarian.hpp"
 
 /**

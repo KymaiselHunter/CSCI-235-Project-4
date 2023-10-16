@@ -5,6 +5,11 @@ Georgina Woo
 June 20 2023
 Tavern.cpp declares the Tavern class along with its private and public members
 */
+
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #include "Tavern.hpp"
 
 /** Default Constructor **/

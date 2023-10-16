@@ -6,6 +6,10 @@ Jun 14 2023
 Ranger.cpp defines the constructors and private and public function implementation of the Ranger class
 */
 
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #include "Ranger.hpp"
 
 /**

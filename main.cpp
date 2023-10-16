@@ -2,6 +2,10 @@
 //Instructor : Dr. Tiziana Ligorio
 //Project 4
 
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #include<iostream>
 using namespace std;
 

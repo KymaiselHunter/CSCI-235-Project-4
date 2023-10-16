@@ -5,6 +5,11 @@ Georgina Woo
 June 14 2023
 Character.hpp declares the Character class along with its private and public members
 */
+
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #ifndef CHARACTER_HPP_
 #define CHARACTER_HPP_
 #include <iostream>

@@ -6,6 +6,10 @@ Jun 14 2023
 Scoundrel.cpp defines the constructors and private and public function implementation of the Scoundrel class
 */
 
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #include "Scoundrel.hpp"
 
 /**

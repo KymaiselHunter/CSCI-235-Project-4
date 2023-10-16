@@ -5,6 +5,11 @@ Georgina Woo
 June 20 2023
 Tavern.hpp declares the Tavern class along with its private and public members
 */
+
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #ifndef TAVERN_
 #define TAVERN_
 

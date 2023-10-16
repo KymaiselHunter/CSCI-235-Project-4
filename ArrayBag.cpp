@@ -3,6 +3,9 @@ ArrayBag interface for term project
 CSCI 235 Fall 2023
 */
 
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
 
 #include "ArrayBag.hpp"
 

@@ -6,6 +6,10 @@ Jun 14 2023
 Mage.hpp defines the constructors and private and public function implementation of the Mage class
 */
 
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #ifndef MAGE_HPP
 #define MAGE_HPP
 

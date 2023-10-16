@@ -3,6 +3,10 @@ ArrayBag interface for term project
 CSCI 235 Fall 2023
 */
 
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #ifndef ARRAY_BAG_
 #define ARRAY_BAG_
 #include <iostream>

@@ -5,6 +5,11 @@ Georgina Woo
 Jun 14 2023
 Scoundrel.hpp defines the constructors and private and public function implementation of the Scoundrel class
 */
+
+//Name : Kyle
+//Instructor : Dr. Tiziana Ligorio
+//Project 4
+
 #ifndef SCOUNDREL_HPP
 #define SCOUNDREL_HPP
 
