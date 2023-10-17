@@ -70,17 +70,16 @@ Tavern::Tavern(std::string pFileName)
 
     while(getline(tavernParameters, line))
     {
-      //
+      //skip the first as the first is a header with invalid input and is not suppose to be a character
+      //NAME,RACE,SUBCLASS,LEVEL,VITALITY,ARMOR,ENEMY,MAIN,OFFHAND,SCHOOL/FACTION,SUMMONING,AFFINITY,DISGUISE,ENRAGED
       if(first)
       {
         first = false;
         continue;
       }
       
-      //std::cout << "line : "<< line << std::endl;
       //loop to get info from line
       std::vector<std::string> lineInformation;
-      //std::cout << line << std::endl;
 
       while(line.find(",") != -1)
       {
@@ -109,7 +108,6 @@ Tavern::Tavern(std::string pFileName)
   //dynamic allocation
   //for dynamic allocation, get size
   int amountOfCharacters = fileToMatrix.size();
-  //std::cout << amountOfCharacters << std::endl;
 
   //dynamically allocated array
   //array of pointers
@@ -119,19 +117,19 @@ Tavern::Tavern(std::string pFileName)
   //exception if input is off
   try 
   {
-    //do for each line to get each char info
+    //do for each row of the 2d vector where each row corresponds to a line of the csv file
     for(int i = 0; i < amountOfCharacters; i++)
     {
+      //take specifically the i'th row of the matrix
       std::vector<std::string> lineInformation = fileToMatrix[i];
-      //std::cout << i << " " <<lineInformation[0] << std::endl;
+
+      //if statement depending on what class to instantiate this object as
       if(lineInformation[2] == "BARBARIAN")
       {
         c[i] = new Barbarian(lineInformation[0], lineInformation[1], 
         std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
         std::stoi(lineInformation[6]), lineInformation[7], lineInformation[8],
         std::stoi(lineInformation[13]));
-        //c[i]->display();
-        //Character *b1 = new Barbarian("BONK", "HUMAN", 11, 5, 5, true, "MACE", "ANOTHERMACE", true);  
       }
       else if(lineInformation[2] == "MAGE")
       {
@@ -139,7 +137,6 @@ Tavern::Tavern(std::string pFileName)
         std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
         std::stoi(lineInformation[6]), lineInformation[9], lineInformation[7],
         std::stoi(lineInformation[10]));
-        //c[i]->display();
       }
       else if(lineInformation[2] == "SCOUNDREL")
       {
@@ -147,10 +144,10 @@ Tavern::Tavern(std::string pFileName)
         std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
         std::stoi(lineInformation[6]), lineInformation[7], lineInformation[9],
         std::stoi(lineInformation[12]));
-        //c[i]->display();
       }
       else if(lineInformation[2] == "RANGER")
       {
+        //create a vector of affinities for the affinity parameter
         std::vector<std::string> affinities;
         
         //if they have affinities, if not, the vect will be empty
@@ -162,7 +159,6 @@ Tavern::Tavern(std::string pFileName)
           {
             affinities.push_back(lineInformation[11].substr(0,lineInformation[11].find(";")));
             lineInformation[11] = lineInformation[11].substr(lineInformation[11].find(";")+1);
-            //std::cout << "issue here? : " << lineInformation[9]<<std::endl;
           }
           //add last affinity after semi colon
           affinities.push_back(lineInformation[11]);
@@ -170,6 +166,7 @@ Tavern::Tavern(std::string pFileName)
 
         std::vector<Arrows> arrows;
 
+        //if this ranger has arrows get that data, if not give an empty arrow vector
         if(lineInformation[7] != "NONE")
         {
           //while loop to go through the arrow list and add them to vect
@@ -184,9 +181,11 @@ Tavern::Tavern(std::string pFileName)
 
             arrows.push_back(a);
             lineInformation[7] = lineInformation[7].substr(lineInformation[7].find(";")+1);
-            //std::cout << "issue here? : " << lineInformation[5]<<std::endl;
           }
           //add last arrow after semi colon
+          //this code does the same thing as the previous block but this will not be going through the for loop
+          //as the last arrow will not have a semicololn after it
+          //Kyle, take a look back at this
           Arrows a;
           a.type_ = lineInformation[7].substr(0,lineInformation[7].find(" "));
           a.quantity_ = std::stoi(lineInformation[7].substr(lineInformation[7].find(" ") + 1, 
@@ -195,37 +194,12 @@ Tavern::Tavern(std::string pFileName)
           arrows.push_back(a);
           lineInformation[7] = lineInformation[7].substr(lineInformation[7].find(";")+1);
         }
-
-        //test to find where error
-        // std::cout << i << " " <<lineInformation[0] << std::endl;
-        // std::cout << i << " " <<lineInformation[1] <<
-        // " " << lineInformation[1] <<
-        // " " << lineInformation[3] <<
-        // " " << lineInformation[4] <<
-        // " " << lineInformation[5] <<
-        // " " << lineInformation[6] <<
-        // std::endl;
-
-        // std::cout << i << " " << lineInformation[10] << std::endl;
-
-        // for(int i = 0; i < affinities.size(); i++)
-        // {
-        //   std::cout << affinities[i] << std::endl;
-        // }
-
-        // for(int i = 0; i < arrows.size(); i++)
-        // {
-        //   std::cout << arrows[i].type_ << " " << arrows[i].quantity_ << std::endl;
-        // }
-
         c[i] = new Ranger(lineInformation[0], lineInformation[1], 
         std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
         std::stoi(lineInformation[6]), arrows, affinities,
         std::stoi(lineInformation[10]));
       }
       else throw "Invalid Input";
-      //std::cout << i << " " << "what the actual fuck" << std::endl;
-      //c[i]->display();
     }
   }
   catch(...)
