@@ -135,7 +135,7 @@ class Tavern : public ArrayBag<Character*>{
     /**
     @post: Every character in the tavern eats a tainted stew.
     */
-    void taintedStew() const;
+    void taintedStew();
 
   private:
     int level_sum_; // An integer sum of the levels of all the characters currently in the tavern

@@ -40,7 +40,7 @@ Tavern::Tavern() : ArrayBag<Character*>(), level_sum_{0}, num_enemies_{0}
 12. Enraged: 0 (False) or 1 (True), only applicable to Barbarians, representing if they are enraged.
     @post: Each line of the input file corresponds to a Character subclass and dynamically allocates Character derived objects, adding them to the Tavern.
 */
-Tavern::Tavern(std::string pFileName)
+Tavern::Tavern(const std::string pFileName)
 {
   //get access to file
   std::ifstream tavernParameters;
@@ -115,7 +115,7 @@ Tavern::Tavern(std::string pFileName)
 
   //create characters
   //exception if input is off
-  try 
+  try
   {
     //do for each row of the 2d vector where each row corresponds to a line of the csv file
     for(int i = 0; i < amountOfCharacters; i++)
@@ -185,13 +185,14 @@ Tavern::Tavern(std::string pFileName)
           //add last arrow after semi colon
           //this code does the same thing as the previous block but this will not be going through the for loop
           //as the last arrow will not have a semicololn after it
-          //Kyle, take a look back at this
           Arrows a;
           a.type_ = lineInformation[7].substr(0,lineInformation[7].find(" "));
           a.quantity_ = std::stoi(lineInformation[7].substr(lineInformation[7].find(" ") + 1, 
           lineInformation[7].find(";") - lineInformation[7].find(" ") + 1));
 
           arrows.push_back(a);
+          //Kyle, take a look back at this
+          //is this line even necessary?
           lineInformation[7] = lineInformation[7].substr(lineInformation[7].find(";")+1);
         }
         c[i] = new Ranger(lineInformation[0], lineInformation[1], 
@@ -382,7 +383,7 @@ void Tavern::displayRace(const std::string &pRace) const
 /**
 @post: Every character in the tavern eats a tainted stew.
 */
-void Tavern::taintedStew() const
+void Tavern::taintedStew()
 {
   for(int i = 0; i < this->getCurrentSize(); i++)
   {
