@@ -172,6 +172,5 @@ int main()
 //     cout << "After taintedStew" << endl;
 
 //     t2.taintedStew();
-// //cout << "wehre??" << endl;
 //     t2.displayCharacters();
 }

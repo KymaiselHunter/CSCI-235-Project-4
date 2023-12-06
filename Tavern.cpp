@@ -43,173 +43,120 @@ Tavern::Tavern() : ArrayBag<Character*>(), level_sum_{0}, num_enemies_{0}
 Tavern::Tavern(const std::string pFileName)
 {
   //get access to file
-  std::ifstream tavernParameters;
+  std::ifstream tavernParameters(pFileName);
   
-  //if file name wrong or file does not exist, file not found
-  try
+  //check for failure to open file
+  if(tavernParameters.fail())
   {
-    tavernParameters.open(pFileName);
-
-    if(!tavernParameters.is_open()) throw 404;
-  }
-  catch(int x)
-  {
-    std::cout << "File Not Found";
+    std::cerr << "File cannot be opened for reading." << std::endl;
+    exit(1);//exit if failed to open
   }
 
-  //now loop through the file to get information for characters
-  //use exception if the information in the file is formated wrong
-  //get information and put it into a 2d matrix
-  //if not enough info throw error
-  std::vector<std::vector<std::string>> fileToMatrix;
-
-  try
-  {
-    std::string line;
-    bool first = true;
-
-    while(getline(tavernParameters, line))
-    {
-      //skip the first as the first is a header with invalid input and is not suppose to be a character
-      //NAME,RACE,SUBCLASS,LEVEL,VITALITY,ARMOR,ENEMY,MAIN,OFFHAND,SCHOOL/FACTION,SUMMONING,AFFINITY,DISGUISE,ENRAGED
-      if(first)
-      {
-        first = false;
-        continue;
-      }
-      
-      //loop to get info from line
-      std::vector<std::string> lineInformation;
-
-      while(line.find(",") != -1)
-      {
-        lineInformation.push_back(line.substr(0, line.find(",")));
-        line = line.substr(line.find(",") + 1);
-      }
-      lineInformation.push_back(line);
-
-      if(lineInformation.size() != 14) throw 14;
-      
-      //send vector of info to matrix
-      fileToMatrix.push_back(lineInformation);
-    }
-  }
-  catch(int x)
-  {
-    std::cout << "Incorrect amount of information in line";
-  }
-  catch(...)
-  {
-    std::cout << "Unknown File to character error";
-  }
-
-  tavernParameters.close();
-  
-  //dynamic allocation
-  //for dynamic allocation, get size
-  int amountOfCharacters = fileToMatrix.size();
+  //remove first line
+  std::string line;
+  getline(tavernParameters,line);
 
   //dynamically allocated array
   //array of pointers
-  Character** c = new Character*[amountOfCharacters];
+  Character** c = new Character*[100];//size is 100 as that is the max that an array bag may hold
+  //size here is more like capacity in this situation
+  int size = 0;//size used for iteration in for loops 
 
-  //create characters
-  //exception if input is off
-  try
+
+  while(getline(tavernParameters, line))
   {
-    //do for each row of the 2d vector where each row corresponds to a line of the csv file
-    for(int i = 0; i < amountOfCharacters; i++)
+    //NAME,RACE,SUBCLASS,LEVEL,VITALITY,ARMOR,ENEMY,MAIN,OFFHAND,SCHOOL/FACTION,SUMMONING,AFFINITY,DISGUISE,ENRAGED
+    
+    //loop to get info from line
+    std::vector<std::string> lineInformation;
+
+    while(line.find(",") != -1)
     {
-      //take specifically the i'th row of the matrix
-      std::vector<std::string> lineInformation = fileToMatrix[i];
-
-      //if statement depending on what class to instantiate this object as
-      if(lineInformation[2] == "BARBARIAN")
+      lineInformation.push_back(line.substr(0, line.find(",")));
+      line = line.substr(line.find(",") + 1);
+    }
+    lineInformation.push_back(line);
+    
+    //if statement depending on what class to instantiate this object as
+    if(lineInformation[2] == "BARBARIAN")
+    {
+      c[size] = new Barbarian(lineInformation[0], lineInformation[1], 
+      std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
+      std::stoi(lineInformation[6]), lineInformation[7], lineInformation[8],
+      std::stoi(lineInformation[13]));
+    }
+    else if(lineInformation[2] == "MAGE")
+    {
+      c[size] = new Mage(lineInformation[0], lineInformation[1], 
+      std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
+      std::stoi(lineInformation[6]), lineInformation[9], lineInformation[7],
+      std::stoi(lineInformation[10]));
+    }
+    else if(lineInformation[2] == "SCOUNDREL")
+    {
+      c[size] = new Scoundrel(lineInformation[0], lineInformation[1], 
+      std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
+      std::stoi(lineInformation[6]), lineInformation[7], lineInformation[9],
+      std::stoi(lineInformation[12]));
+    }
+    else if(lineInformation[2] == "RANGER")
+    {
+      //create a vector of affinities for the affinity parameter
+      std::vector<std::string> affinities;
+      
+      //if they have affinities, if not, the vect will be empty
+      if(lineInformation[11] != "NONE")
       {
-        c[i] = new Barbarian(lineInformation[0], lineInformation[1], 
-        std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
-        std::stoi(lineInformation[6]), lineInformation[7], lineInformation[8],
-        std::stoi(lineInformation[13]));
-      }
-      else if(lineInformation[2] == "MAGE")
-      {
-        c[i] = new Mage(lineInformation[0], lineInformation[1], 
-        std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
-        std::stoi(lineInformation[6]), lineInformation[9], lineInformation[7],
-        std::stoi(lineInformation[10]));
-      }
-      else if(lineInformation[2] == "SCOUNDREL")
-      {
-        c[i] = new Scoundrel(lineInformation[0], lineInformation[1], 
-        std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
-        std::stoi(lineInformation[6]), lineInformation[7], lineInformation[9],
-        std::stoi(lineInformation[12]));
-      }
-      else if(lineInformation[2] == "RANGER")
-      {
-        //create a vector of affinities for the affinity parameter
-        std::vector<std::string> affinities;
-        
-        //if they have affinities, if not, the vect will be empty
-        if(lineInformation[11] != "NONE")
+        //while loop to go through the affinities list and add them to vect
+        //substr to remove added affinities
+        while(lineInformation[11].find(";")!=-1)
         {
-          //while loop to go through the affinities list and add them to vect
-          //substr to remove added affinities
-          while(lineInformation[11].find(";")!=-1)
-          {
-            affinities.push_back(lineInformation[11].substr(0,lineInformation[11].find(";")));
-            lineInformation[11] = lineInformation[11].substr(lineInformation[11].find(";")+1);
-          }
-          //add last affinity after semi colon
-          affinities.push_back(lineInformation[11]);
+          affinities.push_back(lineInformation[11].substr(0,lineInformation[11].find(";")));
+          lineInformation[11] = lineInformation[11].substr(lineInformation[11].find(";")+1);
         }
+        //add last affinity after semi colon
+        affinities.push_back(lineInformation[11]);
+      }
 
-        std::vector<Arrows> arrows;
+      std::vector<Arrows> arrows;
 
-        //if this ranger has arrows get that data, if not give an empty arrow vector
-        if(lineInformation[7] != "NONE")
+      //if this ranger has arrows get that data, if not give an empty arrow vector
+      if(lineInformation[7] != "NONE")
+      {
+        //while loop to go through the arrow list and add them to vect
+        //substr to remove added arrow
+        //use the space to differ between type and quantity
+        while(lineInformation[7].find(";")!=-1)
         {
-          //while loop to go through the arrow list and add them to vect
-          //substr to remove added arrow
-          //use the space to differ between type and quantity
-          while(lineInformation[7].find(";")!=-1)
-          {
-            Arrows a;
-            a.type_ = lineInformation[7].substr(0,lineInformation[7].find(" "));
-            a.quantity_ = std::stoi(lineInformation[7].substr(lineInformation[7].find(" ") + 1, 
-            lineInformation[7].find(";") - lineInformation[7].find(" ") + 1));
-
-            arrows.push_back(a);
-            lineInformation[7] = lineInformation[7].substr(lineInformation[7].find(";")+1);
-          }
-          //add last arrow after semi colon
-          //this code does the same thing as the previous block but this will not be going through the for loop
-          //as the last arrow will not have a semicololn after it
           Arrows a;
           a.type_ = lineInformation[7].substr(0,lineInformation[7].find(" "));
           a.quantity_ = std::stoi(lineInformation[7].substr(lineInformation[7].find(" ") + 1, 
           lineInformation[7].find(";") - lineInformation[7].find(" ") + 1));
 
           arrows.push_back(a);
-          //Kyle, take a look back at this
-          //is this line even necessary?
           lineInformation[7] = lineInformation[7].substr(lineInformation[7].find(";")+1);
         }
-        c[i] = new Ranger(lineInformation[0], lineInformation[1], 
-        std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
-        std::stoi(lineInformation[6]), arrows, affinities,
-        std::stoi(lineInformation[10]));
+        //add last arrow after semi colon
+        //this code does the same thing as the previous block but this will not be going through the for loop
+        //as the last arrow will not have a semicololn after it
+        Arrows a;
+        a.type_ = lineInformation[7].substr(0,lineInformation[7].find(" "));
+        a.quantity_ = std::stoi(lineInformation[7].substr(lineInformation[7].find(" ") + 1));
+
+        arrows.push_back(a);
       }
-      else throw "Invalid Input";
+      c[size] = new Ranger(lineInformation[0], lineInformation[1], 
+      std::stoi(lineInformation[4]), std::stoi(lineInformation[5]), std::stoi(lineInformation[3]),
+      std::stoi(lineInformation[6]), arrows, affinities,
+      std::stoi(lineInformation[10]));
     }
+    size++;
   }
-  catch(...)
-  {
-    std::cout << "Unknown Error when constructing characters";
-  }
-  
+  //close cuz file is no longer needed;
+  tavernParameters.close();
+
   //have the characters enter the tavern
-  for(int i = 0; i < amountOfCharacters; i++)
+  for(int i = 0; i < size; i++)
   {
     this->enterTavern(c[i]);
   }
